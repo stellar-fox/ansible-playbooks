@@ -1,0 +1,9 @@
+---
+# This playbook deploys versioned build directory to the server.
+
+- name: build and deploy as next version
+  hosts: webservers
+  remote_user: "{{ web_user }}"
+
+  roles:
+    - web

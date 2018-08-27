@@ -1,0 +1,5 @@
+---
+# Variables listed here are applicable to all host groups
+
+repository_source: https://github.com/stellar-fox/cygnus.git
+repository_destination: ~/tmp/cygnus
