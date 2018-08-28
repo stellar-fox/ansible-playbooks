@@ -1,18 +1,12 @@
 ---
-# These tasks are responsible for building the latest production code from
-# the version control system. This is done locally.
+# These tasks are responsible for building the latest production API
+# documentation from the version control system. This is done locally.
 
 - name: Clone repository tag.
   git:
     repo: "{{ repository_source }}"
     dest: "{{ repository_destination }}"
     version: "{{ tag }}"
-  delegate_to: localhost
-
-- name: Copy configuration file.
-  copy:
-    src: "{{ config_source }}"
-    dest: "{{ repository_destination }}/src/config.js"
   delegate_to: localhost
 
 - name: Build production version.
