@@ -1,0 +1,3 @@
+---
+- include: local_build.yml
+- include: remote_deploy.yml

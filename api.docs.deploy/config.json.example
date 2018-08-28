@@ -1,0 +1,9 @@
+{
+    "tag": "v.X.X.XX",
+    "tag_2_less": "v.X.X.XX - 2 (as in two less)",
+    "config_source": "path to your local cygnus config file",
+    "remote_dir": "remote directory path where the build should be deployed",
+    "default_owner": "remote owner user name",
+    "default_group": "remote group name",
+    "web_user": "ssh login name"
+}

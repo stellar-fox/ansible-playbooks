@@ -1,0 +1,45 @@
+---
+# These tasks are responsible deploying build directory to the remote server.
+
+- name: SCP tarball to the server.
+  copy:
+    src: "{{ repository_destination }}/{{ tag }}.tar.gz"
+    dest: "{{ remote_dir }}"
+
+- name: Create build-tag directory.
+  file:
+    path: "{{ remote_dir }}/build.{{ tag }}"
+    state: directory
+    owner: "{{ default_owner }}"
+    group: "{{ default_group }}"
+    mode: 0775
+
+- name: Unarchive tarball as the build.X.X.XX.
+  unarchive:
+    src: "{{ remote_dir }}/{{ tag }}.tar.gz"
+    dest: "{{ remote_dir }}/build.{{ tag }}"
+    remote_src: yes
+
+- name: Link build to latest build-tag directory.
+  file:
+    src: "{{ remote_dir }}/build.{{ tag }}"
+    dest: "{{ remote_dir }}/build"
+    owner: "{{ default_owner }}"
+    group: "{{ default_group }}"
+    state: link
+
+- name: Clean tarball artifact.
+  file:
+    state: absent
+    path: "{{ remote_dir }}/{{ tag }}.tar.gz"
+
+- name: Clean previous build directory.
+  file:
+    state: absent
+    path: "{{ remote_dir }}/build.{{ tag_2_less }}/"
+
+- name: Clean local artifacts.
+  file:
+    state: absent
+    path: "{{ repository_destination }}"
+  delegate_to: localhost
