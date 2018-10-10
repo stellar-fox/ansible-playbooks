@@ -4,9 +4,25 @@
 
     sudo dnf install ansible
 
+#### Creating a release on Github (Prerequisite)
+
+The newer release must be created first on Github with
+a tag bearing semantic versioning scheme
+(ie: v.X.Y.ZZ) To create a release on Github, tag the
+master branch with signed annotated tag.
+
+    git tag -s v.X.Y.ZZ
+    git push origin --tags
+
+Update **`tag`** and **`tag_2_less`** in `config.json`
+file to the current tag and tag two releases less than
+current in order to rotate release stack on production
+server.
+
 
 ### Playbook
-This playbook builds the newest release of API Documentation and deploys the
+This playbook builds the release that is specified in
+`config.json`'s **`tag`** property and deploys the
 _build_ package to the server.
 
 
